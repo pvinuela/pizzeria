@@ -1,27 +1,56 @@
 package com.bootcamp.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Comentario {
-    
+public class Comentario implements Serializable {
+     
+    private static final long serialVersionUID = 3L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private String texto;
     private double puntuacion;
     private LocalDate fecha;
-    private String nombre;
-    private String pizza;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Pizza pizza;
     
     public Comentario() {
     }
 
-    public Comentario(String texto, double puntuacion, LocalDate fecha, String nombre, String pizza) {
+    public Comentario(long id, String texto, double puntuacion, LocalDate fecha, @NotNull Usuario usuario,
+            Pizza pizza) {
+        this.id = id;
         this.texto = texto;
         this.puntuacion = puntuacion;
         this.fecha = fecha;
-        this.nombre = nombre;
+        this.usuario = usuario;
         this.pizza = pizza;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTexto() {
@@ -48,21 +77,23 @@ public class Comentario {
         this.fecha = fecha;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getPizza() {
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public void setPizza(String pizza) {
+    public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
+
+
 
     
     
