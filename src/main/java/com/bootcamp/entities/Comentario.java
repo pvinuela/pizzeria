@@ -26,7 +26,7 @@ public class Comentario implements Serializable {
     private LocalDate fecha;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)

@@ -36,7 +36,7 @@ public class Pizza implements Serializable {
 
     private String foto;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "pizza" )
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "pizza" )
     @NotNull(message = "La pizza tiene que tener ingredientes")
     private List<Ingrediente> ingrendientes;
 

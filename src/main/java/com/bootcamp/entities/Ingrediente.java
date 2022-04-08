@@ -37,7 +37,7 @@ public class Ingrediente implements Serializable {
     @Min(value = 0, message = "El precio no puede ser negativo")
     private double precio;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Pizza pizza;
 
 

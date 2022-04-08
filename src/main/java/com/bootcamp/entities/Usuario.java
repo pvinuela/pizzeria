@@ -37,21 +37,24 @@ public class Usuario implements Serializable {
     @NotNull
     private String contraseña;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "usuario")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "usuario")
     private List<Comentario> comentario;
     
     public Usuario() {
     }
 
-    public Usuario(long id, String email, String nombre, String apellido1, String apellido2, String contraseña) {
+    public Usuario(long id, @NotNull @Size(min = 0, max = 255) String email,
+            @NotNull @Size(min = 0, max = 255, message = "El nombre es obligatorio") String nombre,
+            @NotNull String apellido1, @NotNull String apellido2, @NotNull String contraseña,
+            List<Comentario> comentario) {
         this.id = id;
         this.email = email;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.contraseña = contraseña;
+        this.comentario = comentario;
     }
-    
 
     public long getId() {
         return id;
@@ -99,6 +102,14 @@ public class Usuario implements Serializable {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public List<Comentario> getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(List<Comentario> comentario) {
+        this.comentario = comentario;
     }
 
     
